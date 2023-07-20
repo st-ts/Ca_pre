@@ -1,12 +1,31 @@
-% Plot neuronal traces
-close all;
-% path = 'D:\CaIm\discr\os65\';
-% name_base = 'os65_discr _data_processed.mat'; % 'os63_laser_water';
-%% For Tibor
-path = 'D:\CaIm\mix\os65\';
-name_base = 'os65_mix'; % 'os63_laser_water';
-name_end = '_data_processed.mat';
-load([path name_base name_end], 'sigfn');
+%% A tool for evaluation of neurons based on their traces and appearance
+% Plots the overall trace of the neuronal activity, plays a video of the
+% close up of a neuron and shows the neuron on the overall picture
+
+
+%% Load the data: post-processed reg and data_processed
+clear variables;
+[file_reg, path_name] = uigetfile("Choose the post_reg file");
+cd(path_name);
+% Search for the data_processed file using wildcard '*'
+searchPattern = [file_reg(1:7) '*' '_data_processed.mat'];
+
+% Search for files matching the pattern in the specified folder
+matchingFiles = dir(fullfile(path_name, searchPattern));
+
+% Check if any matching files were found
+if isempty(matchingFiles)
+    disp('No matching files found.');
+% If there is more than 1 matfching file, throw an error
+elseif numel(matchingFiles) ~= 1
+    error('more than 1 matching file found, correct that');
+else
+    file_processed = matchingFiles(1).name;
+end
+
+load(file_reg);
+load(file_processed, 'sigfn', 'seedsfn', 'imaxn');
+
 data = sigfn;
 
 set(0, 'DefaultFigureWindowStyle', 'docked');
