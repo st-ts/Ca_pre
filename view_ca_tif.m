@@ -9,27 +9,29 @@
 
 %% Load the files
 clear variables;
-mouse_id  = 65;
-exp_type = 'ambig';
-process_stage = 'reg'; 'frame_all';
-istif = 1;
+tibor = true; 
+if tibor
+    [file_reg, path_name] =  uigetfile("Choose file ending with _reg");
+
+else
+    mouse_id  = 65;
+    exp_type = 'ambig';
+    process_stage = 'reg'; 'frame_all';
+    path_name = [ 'D:\CaIm\' exp_type '\os'  num2str(mouse_id) '\' ];
+    file_tif = [path_name 'os' num2str(mouse_id) '_' exp_type ' - 1.tif'];
+end
+istif = true;
 
 
-% path_name = [ 'D:\CaIm\' exp_type '\os'  num2str(mouse_id) '\' ];
+% 
 
 path_name = 'D:\CaIm\tibor_test\';
 
-if istif
-    file_tif = [path_name 'os' num2str(mouse_id) '_' exp_type ' - 1.tif'];
-    file_tif = 'tibor_test - 1.tif';
-    % 
-    % neu_data = imread([path_name file_name], 'Index', 100);
-end
+file_proc = 
 
 
-file_name = [ 'os' num2str(mouse_id) '_' exp_type '_' process_stage '.mat'];
-file_name = 'tibor_test _reg.mat';
-load([path_name file_name]);
+
+load([path_name file_tif]);
 
 % load([path_name 'os' num2str(mouse_id) '_' exp_type '_data_processed.mat'], 'roifn');
 load([path_name 'tibor_test _data_processed.mat'], 'seedsfn' );
