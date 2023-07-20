@@ -2,15 +2,15 @@
 
 % Specify the file path of the TIFF image and processed file
 path = 'D:\CaIm\tibor_test\';
-file_tif = 'tibor_1st_test.tif';
-file_proc = 'tibor_test _data_processed.mat';
+file_tif = 'tibor_2nd_test.tif';
+file_proc = 'tibor_2nd_test_data_processed.mat';
 load([path file_proc]);
 choose_man = true;
 figure(); 
 imshow(imaxn); colormap(gray); hold on;
 
 % Specify the file path of the output multipage TIFF image
-output_name =  'tibor_1st_test_cropped.tif';
+output_name =  'tibor_2nd_test_cropped.tif';
 
 
 
