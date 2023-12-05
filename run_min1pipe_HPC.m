@@ -4,8 +4,8 @@ exp_type = 'mix';
 % file_name = [ 'os' num2str(mouse_id) '_' exp_type ' - 1.tif'];
 
 
-path_name =  'D:\CaIm\tibor_test\';
-file_name = 'tibor_2nd_test_cropped.tif';
+[file_name, path_name] =  uigetfile();
+mouse_id = file_name(3:4); exp_type = file_name(6:9); 
 % file_name_to_save = [ 'os' num2str(mouse_id) '_' exp_type '_data_processed.mat'];
 % filename_raw = [ 'os' num2str(mouse_id) '_' exp_type '_frame_all.mat'];
 % filename_reg = [ 'os' num2str(mouse_id) '_' exp_type '_reg.mat'];
@@ -14,7 +14,8 @@ if mouse_id == 666
 else
     Fsi = 10; Fsi_new = 10;
 end
-spatialr = 1;
+spatialr = 0.5;
+
 
 
 % Decide the size of a neuron
