@@ -5,13 +5,14 @@
 
 %% Load the files
 clear variables;
+cd('D:\CaIm\');
 tibor = true; 
 if tibor
     [file_reg, path_name] =  uigetfile("Choose file ending with _reg_post");
     cd(path_name);
 
-    file_tif = uigetfile('*.tif', "Choose original tif file");
-    file_processed = [file_tif(1:end-4) '_data_processed.mat'];
+    % file_tif = uigetfile('*.tif', "Choose original tif file");
+    % file_processed = [file_tif(1:end-8) '_data_processed.mat'];
 
 else
     mouse_id  = 65;
@@ -26,7 +27,7 @@ end
 istif = true;
 
 
-load([path_name, file_reg]); load([path_name file_processed]);
+load([path_name, file_reg]); %load([path_name file_processed]);
 
 % load([path_name 'os' num2str(mouse_id) '_' exp_type '_data_processed.mat'], 'roifn');
 
@@ -69,33 +70,33 @@ set(h,'WindowStyle','normal') % Insert the figure to dock
 
 %% Plot the image
 % imshow(imaxy, 'InitialMagnification', 800);
-speed = 100;
-neu_rows = zeros(size(seedsfn,1));
-neu_cols = zeros(size(seedsfn,1));
+speed = 10;
+% neu_rows = zeros(size(seedsfn,1));
+% neu_cols = zeros(size(seedsfn,1));
 res = size(reg);
-for neu = 1:size(seedsfn,1)
-    
-    [neu_rows(neu), neu_cols(neu)] = ind2sub([res(1),res(2)], seedsfn(neu));
-   % plot(row, col, 'o', 'MarkerEdgeColor', [1 0 0], 'MarkerFaceColor', 'none', 'MarkerSize', 11);
-    
+% for neu = 1:size(seedsfn,1)
+% 
+%     % [neu_rows(neu), neu_cols(neu)] = ind2sub([res(1),res(2)], seedsfn(neu));
+%    % plot(row, col, 'o', 'MarkerEdgeColor', [1 0 0], 'MarkerFaceColor', 'none', 'MarkerSize', 11);
+% 
+% 
+% end
+% istif = true;
 
-end
-istif = true;
-
-for fn = 1:speed:size(neu_data,3)
+for fn = 1:speed:2000
         % d
-        if istif
-            %figure(tiffig);
-            subplot(1,2,1);
-            neu_datta = imread(file_tif, 'Index', fn);
-            imshow(neu_datta, [], 'InitialMagnification', 1000); colormap(gray); hold on;
-        % imshow(neu_data(:,:,fn), 'InitialMagnification', 1000); hold on;
-       plot(neu_cols,neu_rows, 'ro', 'MarkerFaceColor', 'none', 'MarkerSize', 6);
-        end
+       %  if istif
+       %      %figure(tiffig);
+       %      subplot(1,2,1);
+       %      % neu_datta = imread(file_tif, 'Index', fn);
+       %      % imshow(neu_datta, [], 'InitialMagnification', 2000); colormap(gray); hold on;
+       %  % imshow(neu_data(:,:,fn), 'InitialMagnification', 1000); hold on;
+       % plot(neu_cols*2,neu_rows*2, 'ro', 'MarkerFaceColor', 'none', 'MarkerSize', 6);
+       %  end
 
-        subplot(1,2,2);
-        imshow(neu_data(:,:,fn), 'InitialMagnification', 1000); hold on;
-        plot(neu_cols,neu_rows, 'ro', 'MarkerFaceColor', 'none', 'MarkerSize', 6);
+        % subplot(1,2,2);
+        imshow(neu_data(:,:,fn), 'InitialMagnification', 2000); hold on;
+        % plot(neu_cols,neu_rows, 'ro', 'MarkerFaceColor', 'none', 'MarkerSize', 6);
         pause(0.05)
 
     
